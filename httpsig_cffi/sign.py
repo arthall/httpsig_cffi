@@ -57,7 +57,6 @@ class Signer(object):
 
     def _sign_rsa(self, data):
         if isinstance(data, six.string_types): data = data.encode("ascii")
-
         r = self._rsa_private.sign(data, padding.PKCS1v15(), self._rsahash())
         return r
 

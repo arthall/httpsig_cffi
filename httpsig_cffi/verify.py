@@ -32,12 +32,8 @@ class Verifier(Signer):
 
         if self.sign_algorithm == 'rsa':
 
-            h = self._rsa_public.verifier(b64decode(signature),
-                                          padding.PKCS1v15(),
-                                          self._rsahash())
-            h.update(data)
             try:
-                h.verify()
+                h = self._rsa_public.verify(b64decode(signature), data, padding.PKCS1v15(), self._rsahash())
                 return True
             except InvalidSignature:
                 return False
